@@ -55,7 +55,9 @@ public class DataController {
 		repositoriesPage.setCurrent(page);
 		repositoriesPage.setSize(limit);
 		LambdaQueryWrapper<Repositories> wrapper = new LambdaQueryWrapper<>();
+		Page<Repositories> respage=dataService.page(repositoriesPage,wrapper);
+		log.info("{}",respage.getSize());
 
-		return dataService.page(repositoriesPage,wrapper);
+		return respage;
 	}
 }
