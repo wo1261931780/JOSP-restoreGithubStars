@@ -16,3 +16,4 @@ server:
 
 github:
   token: 123
+#这里的 token 自己修改，注意保密问题
