@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.4.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>wo1261931780</groupId>
+	<artifactId>JOSP-restoreGithubStars</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>JOSP-restoreGithubStars</name>
+	<description>Demo project for Spring Boot</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+		<!--maven的打包配置-->
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<!--编码格式-->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	<dependencies>
+
+		<!--=============================================================================================-->
+		<!--下面两个配置基本地启动，后面的按需修改-->
+		<!--=============================================================================================-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>3.3.5</version>
+		</dependency>
+		<!--spring网络WEB-->
+		<!--使用SpringMVC构建Web，包括RESTful，应用程序。使用ApacheTomcat作为默认的嵌入式容器。-->
+		<!--里面已经包含了springMVC的内容-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>3.3.5</version>
+			<!--<scope>test</scope>-->
+			<!--上面的scope表示作用范围-->
+			<!--在没有说明的情况下，scope默认就是compile-->
+			<!--如果我把mysql这些数据库驱动jar包设置为runtime-->
+			<!--那么我在日常使用的过程中，是无法访问这些类的-->
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!--=============================================================================================-->
+		<!--Mybatis-->
+		<!--=============================================================================================-->
+		<!--mybatis的分页助手插件-->
+		<!--2023年11月26日14:24:04，有依赖冲突问题，和Mybatis-plus-->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>6.1.0</version>
+		</dependency>
+
+		<!--MyBatis框架SQL-->
+		<!--持久性框架，支持自定义SQL，存储过程和高级映射。MyBatis使用XML描述符或注解将对象与存储程序或SQL语句结合起来。-->
+		<!--这里是mybatis按照spring的标准，开发出来的整合包-->
+		<!--没有配置，项目报错，启动失败-->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+			<version>3.5.7</version>
+		</dependency>
+		<!--=============================================================================================-->
+		<!--DEVELOPER_TOOLS-->
+		<!--=============================================================================================-->
+		<!--Lombok开发者工具-->
+		<!--帮助减少模板代码的Java注释库。-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.34</version>
+			<optional>true</optional>
+			<scope>provided</scope>
+			<!--因为只是源代码中提供了对应的功能-->
+			<!--所以其实不需要参与源代码的打包-->
+		</dependency>
+		<!--=============================================================================================-->
+		<!--数据库连接池-->
+		<!--=============================================================================================-->
+		<!--HikariCP是一个高性能的 JDBC 连接池组件，号称性能最好的后起之秀，是一个基于BoneCP做了不少的改进和优化的高性能JDBC连接池。-->
+		<!--其作者还有产出了另外一个开源作品HikariJSON——高性能的JSON解析器。-->
+		<!--代码体积更是少的可怜，130kb。SpringBoot 2都已经宣布支持了该组件，由之前的Tomcat换成HikariCP。-->
+		<!--其性能远高于c3p0、tomcat等连接池，以致后来BoneCP作者都放弃了维护，在Github项目主页推荐大家使用HikariCP-->
+		<!--<dependency>-->
+		<!--	<groupId>com.zaxxer</groupId>-->
+		<!--	<artifactId>HikariCP</artifactId>-->
+			<!--<version>5.1.0</version>-->
+		<!--</dependency>-->
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+			<version>4.5.0</version>
+		</dependency>
+<dependency>
+    <groupId>cn.hutool</groupId>
+    <artifactId>hutool-all</artifactId>
+    <version>5.8.26</version>
+</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
