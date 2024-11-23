@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="wo1261931780.restore_my_stars.mapper.RepositoriesMapper">
-  <resultMap id="BaseResultMap" type="wo1261931780.restore_my_stars.entity.Repositories">
+<mapper namespace="wo1261931780.JOSP_restoreGithubStars.mapper.RepositoriesMapper">
+  <resultMap id="BaseResultMap" type="wo1261931780.JOSP_restoreGithubStars.entity.Repositories">
     <!--@mbg.generated-->
     <!--@Table github_stars.repositories-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -241,7 +241,7 @@
       )
     </foreach>
   </insert>
-  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="wo1261931780.restore_my_stars.entity.Repositories" useGeneratedKeys="true">
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="wo1261931780.JOSP_restoreGithubStars.entity.Repositories" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into github_stars.repositories
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -292,7 +292,7 @@
       description = #{description,jdbcType=LONGVARCHAR},
     </trim>
   </insert>
-  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="wo1261931780.restore_my_stars.entity.Repositories" useGeneratedKeys="true">
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="wo1261931780.JOSP_restoreGithubStars.entity.Repositories" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into github_stars.repositories
     <trim prefix="(" suffix=")" suffixOverrides=",">

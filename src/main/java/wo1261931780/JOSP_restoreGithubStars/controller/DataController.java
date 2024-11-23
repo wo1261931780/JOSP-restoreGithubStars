@@ -1,5 +1,6 @@
 package wo1261931780.JOSP_restoreGithubStars.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class DataController {
 	@Autowired
 	private GitHubService gitHubService;
 
+	/**
+	 * 先在 github 中获取最新数据，然后将其保存到本地数据库
+	 * @return 成功失败
+	 */
 	@PutMapping("/queryAndSaveAllRepository")
 	public Boolean getStarredRepositories() {
 		List<Repositories> repositoriesList = gitHubService.getStarredRepositories("wo1261931780");
@@ -35,6 +40,12 @@ public class DataController {
 		return !repositoriesList.isEmpty() ? Boolean.TRUE : Boolean.FALSE;
 	}
 
+	/**
+	 * 查询本地的数据库，不调用远程 api
+	 * @param page 页数
+	 * @param limit 每页数据量
+	 * @return 分页结果
+	 */
 	@GetMapping("/queryDatabase")
 	public Page<Repositories> getDatabase(
 			@RequestParam Integer page
@@ -43,6 +54,8 @@ public class DataController {
 		Page<Repositories> repositoriesPage = new Page<>();
 		repositoriesPage.setCurrent(page);
 		repositoriesPage.setSize(limit);
-		return dataService.page(repositoriesPage);
+		LambdaQueryWrapper<Repositories> wrapper = new LambdaQueryWrapper<>();
+
+		return dataService.page(repositoriesPage,wrapper);
 	}
 }

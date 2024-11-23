@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wo1261931780.JOSP_restoreGithubStars.mapper.RepositoriesMapper">
+  <resultMap id="BaseResultMap" type="wo1261931780.JOSP_restoreGithubStars.entity.Repositories">
+    <!--@mbg.generated-->
+    <!--@Table github_stars.repositories-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="repositorie_name" jdbcType="VARCHAR" property="repositorieName" />
+    <result column="html_url" jdbcType="VARCHAR" property="htmlUrl" />
+    <result column="code_language" jdbcType="VARCHAR" property="codeLanguage" />
+    <result column="forks_count" jdbcType="BIGINT" property="forksCount" />
+    <result column="watchers_count" jdbcType="BIGINT" property="watchersCount" />
+    <result column="pushed_at" jdbcType="TIMESTAMP" property="pushedAt" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="license_name" jdbcType="VARCHAR" property="licenseName" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, repositorie_name, html_url, code_language, forks_count, watchers_count, pushed_at, 
+    created_at, updated_at, license_name, description
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update github_stars.repositories
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="repositorie_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.repositorieName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="html_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.htmlUrl,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="code_language = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.codeLanguage,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="forks_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.forksCount,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="watchers_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.watchersCount,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="pushed_at = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.pushedAt,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="created_at = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createdAt,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="updated_at = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.updatedAt,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="license_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.licenseName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="description = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.description,jdbcType=LONGVARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into github_stars.repositories
+    (repositorie_name, html_url, code_language, forks_count, watchers_count, pushed_at, 
+      created_at, updated_at, license_name, description)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.repositorieName,jdbcType=VARCHAR}, #{item.htmlUrl,jdbcType=VARCHAR}, #{item.codeLanguage,jdbcType=VARCHAR}, 
+        #{item.forksCount,jdbcType=BIGINT}, #{item.watchersCount,jdbcType=BIGINT}, #{item.pushedAt,jdbcType=TIMESTAMP}, 
+        #{item.createdAt,jdbcType=TIMESTAMP}, #{item.updatedAt,jdbcType=TIMESTAMP}, #{item.licenseName,jdbcType=VARCHAR}, 
+        #{item.description,jdbcType=LONGVARCHAR})
+    </foreach>
+  </insert>
+  <delete id="deleteByPrimaryKeyIn">
+    <!--@mbg.generated-->
+    delete from github_stars.repositories where id in 
+    <foreach close=")" collection="list" item="id" open="(" separator=", ">
+      #{id,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <update id="updateBatchUseMultiQuery" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    <foreach collection="list" item="item" separator=";">
+      update github_stars.repositories
+      <set>
+        <if test="item.repositorieName != null">
+          repositorie_name = #{item.repositorieName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.htmlUrl != null">
+          html_url = #{item.htmlUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="item.codeLanguage != null">
+          code_language = #{item.codeLanguage,jdbcType=VARCHAR},
+        </if>
+        <if test="item.forksCount != null">
+          forks_count = #{item.forksCount,jdbcType=BIGINT},
+        </if>
+        <if test="item.watchersCount != null">
+          watchers_count = #{item.watchersCount,jdbcType=BIGINT},
+        </if>
+        <if test="item.pushedAt != null">
+          pushed_at = #{item.pushedAt,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.createdAt != null">
+          created_at = #{item.createdAt,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updatedAt != null">
+          updated_at = #{item.updatedAt,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.licenseName != null">
+          license_name = #{item.licenseName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.description != null">
+          description = #{item.description,jdbcType=LONGVARCHAR},
+        </if>
+      </set>
+      where id = #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsertSelectiveUseDefaultForNull" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into github_stars.repositories
+    (repositorie_name, html_url, code_language, forks_count, watchers_count, pushed_at, 
+      created_at, updated_at, license_name, description)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <choose>
+        <when test="item.repositorieName != null">
+          #{item.repositorieName,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.htmlUrl != null">
+          #{item.htmlUrl,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.codeLanguage != null">
+          #{item.codeLanguage,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.forksCount != null">
+          #{item.forksCount,jdbcType=BIGINT},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.watchersCount != null">
+          #{item.watchersCount,jdbcType=BIGINT},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.pushedAt != null">
+          #{item.pushedAt,jdbcType=TIMESTAMP},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.createdAt != null">
+          #{item.createdAt,jdbcType=TIMESTAMP},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.updatedAt != null">
+          #{item.updatedAt,jdbcType=TIMESTAMP},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.licenseName != null">
+          #{item.licenseName,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.description != null">
+          #{item.description,jdbcType=LONGVARCHAR}
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT
+        </otherwise>
+      </choose>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="wo1261931780.JOSP_restoreGithubStars.entity.Repositories" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into github_stars.repositories
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      repositorie_name,
+      html_url,
+      code_language,
+      forks_count,
+      watchers_count,
+      pushed_at,
+      created_at,
+      updated_at,
+      license_name,
+      description,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      #{repositorieName,jdbcType=VARCHAR},
+      #{htmlUrl,jdbcType=VARCHAR},
+      #{codeLanguage,jdbcType=VARCHAR},
+      #{forksCount,jdbcType=BIGINT},
+      #{watchersCount,jdbcType=BIGINT},
+      #{pushedAt,jdbcType=TIMESTAMP},
+      #{createdAt,jdbcType=TIMESTAMP},
+      #{updatedAt,jdbcType=TIMESTAMP},
+      #{licenseName,jdbcType=VARCHAR},
+      #{description,jdbcType=LONGVARCHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      repositorie_name = #{repositorieName,jdbcType=VARCHAR},
+      html_url = #{htmlUrl,jdbcType=VARCHAR},
+      code_language = #{codeLanguage,jdbcType=VARCHAR},
+      forks_count = #{forksCount,jdbcType=BIGINT},
+      watchers_count = #{watchersCount,jdbcType=BIGINT},
+      pushed_at = #{pushedAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      license_name = #{licenseName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="wo1261931780.JOSP_restoreGithubStars.entity.Repositories" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into github_stars.repositories
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="repositorieName != null">
+        repositorie_name,
+      </if>
+      <if test="htmlUrl != null">
+        html_url,
+      </if>
+      <if test="codeLanguage != null">
+        code_language,
+      </if>
+      <if test="forksCount != null">
+        forks_count,
+      </if>
+      <if test="watchersCount != null">
+        watchers_count,
+      </if>
+      <if test="pushedAt != null">
+        pushed_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="licenseName != null">
+        license_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="repositorieName != null">
+        #{repositorieName,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlUrl != null">
+        #{htmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="codeLanguage != null">
+        #{codeLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="forksCount != null">
+        #{forksCount,jdbcType=BIGINT},
+      </if>
+      <if test="watchersCount != null">
+        #{watchersCount,jdbcType=BIGINT},
+      </if>
+      <if test="pushedAt != null">
+        #{pushedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="licenseName != null">
+        #{licenseName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="repositorieName != null">
+        repositorie_name = #{repositorieName,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlUrl != null">
+        html_url = #{htmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="codeLanguage != null">
+        code_language = #{codeLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="forksCount != null">
+        forks_count = #{forksCount,jdbcType=BIGINT},
+      </if>
+      <if test="watchersCount != null">
+        watchers_count = #{watchersCount,jdbcType=BIGINT},
+      </if>
+      <if test="pushedAt != null">
+        pushed_at = #{pushedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="licenseName != null">
+        license_name = #{licenseName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
