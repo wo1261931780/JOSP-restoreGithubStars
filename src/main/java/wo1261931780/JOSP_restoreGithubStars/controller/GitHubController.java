@@ -3,6 +3,7 @@ package wo1261931780.JOSP_restoreGithubStars.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import wo1261931780.JOSP_restoreGithubStars.config.ShowResult;
 import wo1261931780.JOSP_restoreGithubStars.entity.Repositories;
 import wo1261931780.JOSP_restoreGithubStars.entity.Repository;
 import wo1261931780.JOSP_restoreGithubStars.service.GitHubService;
@@ -10,6 +11,7 @@ import wo1261931780.JOSP_restoreGithubStars.service.GitHubService;
 import java.util.List;
 
 /**
+ * GitHub Stars管理控制器
  * @author junw
  */
 @RestController
@@ -18,21 +20,36 @@ public class GitHubController {
 	@Autowired
 	private GitHubService gitHubService;
 
+	/**
+	 * 获取用户的starred仓库列表
+	 */
 	@GetMapping("/stars/{username}")
-	public List<Repositories> getStarredRepositories(@PathVariable String username) {
-		return gitHubService.getStarredRepositories("wo1261931780");
-		// return gitHubService.getStarredRepositories(username);
+	public ShowResult<List<Repositories>> getStarredRepositories(@PathVariable String username) {
+		List<Repositories> repositories = gitHubService.getStarredRepositories("wo1261931780");
+		return ShowResult.sendSuccess(repositories);
 	}
 
-	// Endpoint to star a repository
+	/**
+	 * Star一个仓库
+	 */
 	@PutMapping("/star")
-	public ResponseEntity<Void> starRepository(@RequestBody Repository repository) {
-		return gitHubService.starRepository(repository);
+	public ShowResult<String> starRepository(@RequestBody Repository repository) {
+		ResponseEntity<Void> response = gitHubService.starRepository(repository);
+		if (response.getStatusCode().is2xxSuccessful()) {
+			return ShowResult.sendSuccess("Star成功", "操作成功");
+		}
+		return ShowResult.sendError("Star失败");
 	}
 
-	// Endpoint to unstar a repository
+	/**
+	 * Unstar一个仓库
+	 */
 	@DeleteMapping("/unstar")
-	public ResponseEntity<Void> unstarRepository(@RequestBody Repository repository) {
-		return gitHubService.unstarRepository(repository);
+	public ShowResult<String> unstarRepository(@RequestBody Repository repository) {
+		ResponseEntity<Void> response = gitHubService.unstarRepository(repository);
+		if (response.getStatusCode().is2xxSuccessful()) {
+			return ShowResult.sendSuccess("Unstar成功", "操作成功");
+		}
+		return ShowResult.sendError("Unstar失败");
 	}
 }
