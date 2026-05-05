@@ -43,6 +43,50 @@ src/main/java/wo1261931780/JOSP_restoreGithubStars/
     └── GitHubService.java                     # GitHub API 服务
 ```
 
+## 系统架构图
+
+```mermaid
+flowchart TB
+    subgraph Frontend["前端展示层"]
+        Web["Web 客户端"]
+    end
+
+    subgraph API["API 网关层"]
+        Controller["GitHubController<br/>REST API"]
+    end
+
+    subgraph Service["业务逻辑层"]
+        GitHubSvc["GitHubService<br/>GitHub API 服务"]
+        DataSvc["DataService<br/>数据管理服务"]
+    end
+
+    subgraph External["外部服务"]
+        GitHubAPI["GitHub API<br/>stars 管理"]
+    end
+
+    subgraph Data["数据访问层"]
+        MP["MyBatis-Plus<br/>ORM 框架"]
+    end
+
+    subgraph Database["数据存储层"]
+        MySQL[(MySQL 8.x<br/>github_stars)]
+    end
+
+    Frontend --> Controller
+    Controller --> GitHubSvc
+    Controller --> DataSvc
+    GitHubSvc --> GitHubAPI
+    DataSvc --> MP
+    MP --> MySQL
+
+    style Frontend fill:#e3f2fd,stroke:#1565c0
+    style API fill:#fff3e0,stroke:#f57c00
+    style Service fill:#e8f5e9,stroke:#388e3c
+    style External fill:#fff9c4,stroke:#f9a825
+    style Data fill:#fce4ec,stroke:#c2185b
+    style Database fill:#e0f7fa,stroke:#00838f
+```
+
 ## 快速开始
 
 ### 1. 环境要求
